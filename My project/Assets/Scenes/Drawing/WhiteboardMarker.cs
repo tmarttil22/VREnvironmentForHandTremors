@@ -16,14 +16,14 @@ public class WhiteboardMarker : MonoBehaviour
     private Whiteboard whiteboard;
     private Vector2 touchPos, lastTouchPos;
     private bool touchedLastFrame;
-    private Quaternion lastTouchRot;
+    //private Quaternion lastTouchRot;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         r = tip.GetComponent<Renderer>();
         colors = Enumerable.Repeat(r.material.color, penSize*penSize).ToArray();
-        tipHeight = tip.localScale.y;
+        tipHeight = (tip.localScale.y / 2);
     }
 
     // Update is called once per frame
@@ -62,13 +62,13 @@ public class WhiteboardMarker : MonoBehaviour
 
                     }
 
-                    transform.rotation = lastTouchRot;
+                    //transform.rotation = lastTouchRot;
 
                     whiteboard.texture.Apply();
                 }
 
                 lastTouchPos = new Vector2(x, y);
-                lastTouchRot = transform.rotation;
+                //lastTouchRot = transform.rotation;
                 touchedLastFrame = true;
                 return;
             }
