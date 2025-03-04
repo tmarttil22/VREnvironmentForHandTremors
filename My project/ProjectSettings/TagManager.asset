@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Whiteboard
   - Stack
+  - Mug
   layers:
   - Default
   - TransparentFX
@@ -13,9 +14,11 @@ TagManager:
   - 
   - Water
   - UI
-  - Hands
-  - Player
-  - 
+
+  - IgnoreHandCollisions
+  - LeftHandPhysics
+  - RightHandPhysics
+
   - 
   - 
   - 
