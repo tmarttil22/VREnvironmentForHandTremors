@@ -7,12 +7,17 @@ public class ParticleSystemTrigger : MonoBehaviour
     public float triggerDegree = 20.0f;
     private float degrees;
     private bool isPlaying;
+    WaterController waterController;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         waterParticles = particleSystemObject.GetComponent<ParticleSystem>();
         waterParticles.Stop();
         isPlaying = false;
+
+        if (gameObject.tag == "Mug") {
+            waterController = gameObject.GetComponent<WaterController>();
+        }
     }
 
     // Update is called once per frame
@@ -22,7 +27,11 @@ public class ParticleSystemTrigger : MonoBehaviour
 
         degrees = Vector3.Angle(Vector3.up, transform.up);
 
-        if (degrees > triggerDegree) {
+        if (gameObject.tag == "Mug" && waterController.isEmpty()) {
+            waterParticles.Stop();
+            isPlaying = false;
+        
+        } else if (degrees > triggerDegree) {
             if (!isPlaying) {
                 waterParticles.Play();
                 isPlaying = true;
@@ -47,6 +56,10 @@ public class ParticleSystemTrigger : MonoBehaviour
             WaterController waterController = gameObject.GetComponent<WaterController>();
             waterController.Empty();
         }
+    }
+
+    public float getDegrees() {
+        return degrees;
     }
 
     bool GetIsPlaying() {
