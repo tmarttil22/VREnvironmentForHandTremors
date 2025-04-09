@@ -8,10 +8,16 @@ public class HeightUpdater : MonoBehaviour
     private TextMeshProUGUI text;
     private GameObject[] objects;
     private float maxY, height;
+    private float targetHeight = 0.4f;
+
+    public GameObject taskCompletionObject;
+    private TaskCompletionHandler taskCompletionHandler;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        taskCompletionHandler = taskCompletionObject.GetComponent<TaskCompletionHandler>();
+
         text = gameObject.GetComponent<TextMeshProUGUI>();
         objects = GameObject.FindGameObjectsWithTag("Stack");
     }
@@ -28,6 +34,10 @@ public class HeightUpdater : MonoBehaviour
         }
 
         height = maxY - offSet + blockHeight;
+
+        if (height >= targetHeight) {
+            taskCompletionHandler.SetAsCompleted();
+        }
 
         text.text = string.Format("Height: {0:0.00} m", height);
     }

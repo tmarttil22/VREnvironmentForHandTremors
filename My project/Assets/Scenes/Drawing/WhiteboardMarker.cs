@@ -18,9 +18,15 @@ public class WhiteboardMarker : MonoBehaviour
     private bool touchedLastFrame;
     //private Quaternion lastTouchRot;
 
+    public GameObject taskCompletionObject;
+    private TaskCompletionHandler taskCompletionHandler;
+    private bool taskCompleted = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        taskCompletionHandler = taskCompletionObject.GetComponent<TaskCompletionHandler>();
+
         r = tip.GetComponent<Renderer>();
         colors = Enumerable.Repeat(r.material.color, penSize*penSize).ToArray();
         tipHeight = (tip.localScale.y / 2);
@@ -36,6 +42,11 @@ public class WhiteboardMarker : MonoBehaviour
         if (Physics.Raycast(tip.position, transform.up, out touch, tipHeight)) {
 
             if (touch.transform.CompareTag("Whiteboard")) {
+
+                if (!taskCompleted) {
+                    taskCompletionHandler.SetAsCompleted();
+                    taskCompleted = true;
+                }
 
                 if (whiteboard == null) {
                     whiteboard = touch.transform.GetComponent<Whiteboard>();

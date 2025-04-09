@@ -11,6 +11,8 @@ public class HologramChecker : MonoBehaviour
     private Collider[] targetColliders;
     public TextMeshProUGUI ObjectText;
 
+    private bool isInside = false;
+
     void Start()
     {
         hologramColliders = GetComponentsInChildren<Collider>();
@@ -45,11 +47,15 @@ public class HologramChecker : MonoBehaviour
 
         float overlapRatio = (float)insideCount / targetColliders.Length;
 
-        Boolean isInside = overlapRatio >= overlapThreshold;
+        isInside = overlapRatio >= overlapThreshold;
         if (isInside) {
             // ADD LOGIC ON WHAT TO DO WHEN OBJECT IS MOSTLY INSIDE
             //Debug.Log("Object is at least 80% inside the hologram");
         }
         ObjectText.text = target.name + " in place: " + isInside + ", Percentage: " + Mathf.Round(overlapRatio * 100) + "%";
+    }
+
+    public bool GetIsInside() {
+        return isInside;
     }
 }

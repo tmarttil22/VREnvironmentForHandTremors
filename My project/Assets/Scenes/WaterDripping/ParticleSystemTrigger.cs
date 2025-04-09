@@ -4,6 +4,7 @@ public class ParticleSystemTrigger : MonoBehaviour
 {
     public GameObject particleSystemObject;
     private ParticleSystem waterParticles;
+    private AudioSource waterAudio;
     public float triggerDegree = 20.0f;
     private float degrees;
     private bool isPlaying;
@@ -12,6 +13,7 @@ public class ParticleSystemTrigger : MonoBehaviour
     void Start()
     {
         waterParticles = particleSystemObject.GetComponent<ParticleSystem>();
+        waterAudio = particleSystemObject.GetComponent<AudioSource>();
         waterParticles.Stop();
         isPlaying = false;
 
@@ -29,16 +31,19 @@ public class ParticleSystemTrigger : MonoBehaviour
 
         if (gameObject.tag == "Mug" && waterController.isEmpty()) {
             waterParticles.Stop();
+            waterAudio.Stop();
             isPlaying = false;
         
         } else if (degrees > triggerDegree) {
             if (!isPlaying) {
                 waterParticles.Play();
+                waterAudio.Play();
                 isPlaying = true;
             }
         } else {
             if (isPlaying) {
                 waterParticles.Stop();
+                waterAudio.Stop();
                 isPlaying = false;
             }
         }
