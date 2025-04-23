@@ -1,20 +1,21 @@
 using UnityEngine;
 using TMPro;
-public class DishWasherLogic : MonoBehaviour
+public class KitchenSinkLogic : MonoBehaviour
 {
+   
     public GameObject ScoreHandlerObject;
-    private CheckDishes checkDishes;
+    private CheckDirtyDishes checkDirtyDishes;
     private TextMeshProUGUI text;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        checkDishes = ScoreHandlerObject.GetComponent<CheckDishes>();
+        checkDirtyDishes = ScoreHandlerObject.GetComponent<CheckDirtyDishes>();
         text = gameObject.GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-          text.text = string.Format("{0}/9", checkDishes.checkProgress());
+          text.text = string.Format("{0}/4", checkDirtyDishes.checkProgress());
     }
 }

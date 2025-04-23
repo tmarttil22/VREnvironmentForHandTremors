@@ -48,13 +48,12 @@ public class CheckDishes : MonoBehaviour
             mugCount--;
         }
     }
-    public bool CheckCompletion(){
+    void CheckCompletion(){
         if (plateCount == targetPlateCount && mugCount == targetMugCount){
             targetZoneFull = true;
-            return true;
+            taskCompletionHandler.SetAsCompleted();
         }else{
             targetZoneFull = false;
-            return false;
         }
     }
     public int checkProgress(){
