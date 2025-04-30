@@ -4,26 +4,39 @@ public class ProgressTracker : MonoBehaviour
 {
 
 
-    public GameObject drawTask;
-    public GameObject sortTask;
+    public GameObject drawTaskScript;
+    public GameObject sortTaskScript;
 
-    public GameObject serveTask;
+    public GameObject serveTaskScript;
 
-    public GameObject fillDishwasher;
+    public CheckDirtyDishes fillDishwasherScript;
 
-    public GameObject emptyDishwasher;
+    public CheckDishes emptyDishwasherScript;
 
 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        text = gameObject.GetComponent<TextMeshProUGUI>();
+    
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(checkGameCompletion()){
+            gameFinished();
+        }
+    }
+
+    bool checkGameCompletion(){
+        if(fillDishwasherScript.targetZoneFull && emptyDishwasherScript.targetZoneFull){
+            return true;
+        }
+        return false;
+    }
+
+    void gameFinished(){
+//show some ui element
     }
 }

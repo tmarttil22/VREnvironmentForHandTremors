@@ -48,7 +48,7 @@ public class CheckDirtyDishes : MonoBehaviour
             mugCount--;
         }
     }
-    void CheckCompletion(){
+    public void CheckCompletion(){
         if (plateCount == targetPlateCount && mugCount == targetMugCount){
             targetZoneFull = true;
             taskCompletionHandler.SetAsCompleted();
