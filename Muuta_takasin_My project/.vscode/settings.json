@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Muuta_takasin_My project.sln"
+    "dotnet.defaultSolution": "Muuta_takasin_My project.sln",
+    "FSharp.suggestGitignore": false
 }
