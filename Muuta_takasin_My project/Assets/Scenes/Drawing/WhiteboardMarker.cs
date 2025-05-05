@@ -52,6 +52,10 @@ public class WhiteboardMarker : MonoBehaviour
                     whiteboard = touch.transform.GetComponent<Whiteboard>();
                 }
 
+                if (!whiteboard.IsTouched()) {
+                    whiteboard.SetAsTouched();
+                }
+
                 touchPos = new Vector2(touch.textureCoord.x, touch.textureCoord.y);
 
                 var x = (int)(touchPos.x * whiteboard.textureSize.x - (penSize / 2));

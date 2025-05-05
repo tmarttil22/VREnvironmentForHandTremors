@@ -4,8 +4,8 @@ public class ProgressTracker : MonoBehaviour
 {
 
 
-    public GameObject drawTaskScript;
-    public GameObject sortTaskScript;
+    public CheckDrawings drawTaskScript;
+    public CheckSorting sortTaskScript;
 
     public GameObject serveTaskScript;
 
@@ -30,13 +30,17 @@ public class ProgressTracker : MonoBehaviour
     }
 
     bool checkGameCompletion(){
-        if(fillDishwasherScript.targetZoneFull && emptyDishwasherScript.targetZoneFull){
+        if(fillDishwasherScript.targetZoneFull 
+        && emptyDishwasherScript.targetZoneFull
+        && sortTaskScript.IsSortingCompleted()
+        && drawTaskScript.IsDrawingCompleted()){
             return true;
         }
         return false;
     }
 
     void gameFinished(){
+        Debug.Log("DEBUG: TASKS COMPLETED");
 //show some ui element
     }
 }

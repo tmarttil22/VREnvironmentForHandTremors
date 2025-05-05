@@ -17,7 +17,9 @@ public class CheckSorting : MonoBehaviour
 
     private SortHandler[] sortHandlers;
 
+    public int totalCount = 5;
     private int correctCount = 0;
+    private bool sortingCompleted = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,12 +45,22 @@ public class CheckSorting : MonoBehaviour
             }
         }
 
-        if (correctCount == 5) {
+        if (correctCount == totalCount) {
             taskCompletionHandler.SetAsCompleted();
+
+            SetSortingCompleted();
         }
     }
 
     public int GetCorrectCount() {
         return correctCount;
+    }
+
+    private void SetSortingCompleted() {
+        sortingCompleted = true;
+    }
+
+    public bool IsSortingCompleted() {
+        return sortingCompleted;
     }
 }
