@@ -18,7 +18,7 @@ TagManager:
   - IgnoreHandCollisions
   - LeftHandPhysics
   - RightHandPhysics
-  - 
+  - Playercollisions
   - 
   - 
   - 

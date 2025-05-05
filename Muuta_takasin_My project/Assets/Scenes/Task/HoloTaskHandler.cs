@@ -10,9 +10,12 @@ public class HoloTaskHandler : MonoBehaviour
     private HologramChecker plateHoloChecker;
     public GameObject bowlHolo;
     private HologramChecker bowlHoloChecker;
+    public GameObject breadHolo;
+    private HologramChecker breadHoloChecker;
 
     public GameObject taskCompletionObject;
     private TaskCompletionHandler taskCompletionHandler;
+
 
     private bool taskCompleted = false;
 
@@ -25,6 +28,7 @@ public class HoloTaskHandler : MonoBehaviour
         potHoloChecker = potHolo.GetComponent<HologramChecker>();
         plateHoloChecker = plateHolo.GetComponent<HologramChecker>();
         bowlHoloChecker = bowlHolo.GetComponent<HologramChecker>();
+        breadHoloChecker = breadHolo.GetComponent<HologramChecker>();
     }
 
     // Update is called once per frame
@@ -34,7 +38,8 @@ public class HoloTaskHandler : MonoBehaviour
             if (mugHoloChecker.GetIsInside()
             && potHoloChecker.GetIsInside()
             && plateHoloChecker.GetIsInside()
-            && bowlHoloChecker.GetIsInside()) {
+            && bowlHoloChecker.GetIsInside()
+            && breadHoloChecker.GetIsInside()) {
                 taskCompleted = true;
                 taskCompletionHandler.SetAsCompleted();
             }
