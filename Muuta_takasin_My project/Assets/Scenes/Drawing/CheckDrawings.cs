@@ -7,6 +7,7 @@ public class CheckDrawings : MonoBehaviour
     public Whiteboard squareDrawing;
     public Whiteboard circleDrawing;
     public Whiteboard starDrawing;
+    public Whiteboard finalDrawing;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,7 +22,9 @@ public class CheckDrawings : MonoBehaviour
 
             if (squareDrawing.IsTouched() 
             && circleDrawing.IsTouched()
-            && starDrawing.IsTouched()) 
+            && starDrawing.IsTouched()
+            && finalDrawing.IsTouched()
+            ) 
             {
                 drawingCompleted = true;
             }

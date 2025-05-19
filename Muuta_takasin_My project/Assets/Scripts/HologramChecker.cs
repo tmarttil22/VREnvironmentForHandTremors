@@ -51,8 +51,12 @@ public class HologramChecker : MonoBehaviour
         if (isInside) {
             // ADD LOGIC ON WHAT TO DO WHEN OBJECT IS MOSTLY INSIDE
             //Debug.Log("Object is at least 80% inside the hologram");
+            ObjectText.text = "";
+        } else {
+            ObjectText.text = target.name;
         }
-        ObjectText.text = target.name + " in place: " + isInside + ", Percentage: " + Mathf.Round(overlapRatio * 100) + "%";
+        //ObjectText.text = target.name + " in place: " + isInside + ", Percentage: " + Mathf.Round(overlapRatio * 100) + "%";
+        
     }
 
     public bool GetIsInside() {
