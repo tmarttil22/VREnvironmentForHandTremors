@@ -27,11 +27,52 @@ public class ControllerDataLogger : MonoBehaviour
     private float timeSinceLastFlush = 0f;
     private bool fileInitialized = false;
 
+//my modifications for XR movewment disorders - Akseli
+    public ProgressTracker progressTracker;
+
+    //1
+    private bool cleanDishesStartedLogged;
+    private bool cleanDishesFinishedLogged;   
+    //2
+    private bool dirtyDishesStartedLogged;
+    private bool dirtyDishesFinishedLogged;
+    //3
+    private bool sortingStartedLogged;
+    private bool sortingFinishedLogged;
+    //4
+    private bool servingStartedLogged;
+    private bool servingFinishedLogged;
+    //5
+    private bool drawingStartedLogged;
+    private bool drawingFinishedLogged;
+
+
     void Start()
     {
         string path = Application.dataPath + "/Log/";
         fileName = $"{fileName}_{controllerSide}_{DateTime.UtcNow:yyyyMMdd_HHmmss}.csv";
         filePath = path + fileName;
+
+        // 1 - Clean Dishes
+        cleanDishesStartedLogged = false;
+        cleanDishesFinishedLogged = false;
+
+        // 2 - Dirty Dishes
+        dirtyDishesStartedLogged = false;
+        dirtyDishesFinishedLogged = false;
+
+        // 3 - Sorting
+        sortingStartedLogged = false;
+        sortingFinishedLogged = false;
+
+        // 4 - Serving
+        servingStartedLogged = false;
+        servingFinishedLogged = false;
+
+        // 5 - Drawing
+        drawingStartedLogged = false;
+        drawingFinishedLogged = false;
+
     }
 
     void Update()
@@ -39,8 +80,8 @@ public class ControllerDataLogger : MonoBehaviour
         // Record data
         Vector3 pos = transform.position;
         Vector3 rot = transform.eulerAngles;
-        double timeInS = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-
+    //    double timeInS = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        double timeInS = Time.time;
         buffer.Add(new LogEntry
         {
             timestamp = timeInS,
@@ -67,6 +108,54 @@ public class ControllerDataLogger : MonoBehaviour
         bool writeHeader = !fileInitialized;
         using (StreamWriter writer = new StreamWriter(filePath, true))
         {
+            //my modifications xr disorders -AA
+            //1
+            if(!cleanDishesStartedLogged &&progressTracker.checkStartOfCleanDishes()){
+                writer.WriteLine("Empty dishwasher start");
+                cleanDishesStartedLogged = true;
+            }
+             if(!cleanDishesFinishedLogged &&progressTracker.checkEndOfCleanDishes()){
+                writer.WriteLine("Empty dishwasher end");
+                cleanDishesFinishedLogged = true;
+            }
+            //2
+            if(!dirtyDishesStartedLogged &&progressTracker.checkStartOfDirtyDishes()){
+                writer.WriteLine("Fill dishwasher start");
+                dirtyDishesStartedLogged = true;
+            }
+             if(!dirtyDishesFinishedLogged &&progressTracker.checkEndOfDirtyDishes()){
+                writer.WriteLine("Fill dishwasher end");
+                dirtyDishesFinishedLogged = true;
+            }
+            //3
+            //4
+            //5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //////////////////////
             if (writeHeader)
             {
                 writer.WriteLine("timestamp,controller_side,position_x,position_y,position_z,rotation_x,rotation_y,rotation_z");

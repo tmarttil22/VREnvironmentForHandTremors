@@ -28,8 +28,45 @@ public class ProgressTracker : MonoBehaviour
             gameFinished();
         }
     }
+//1 cleansdishes
+    public bool checkStartOfCleanDishes(){
+        if(emptyDishwasherScript.emptyDishesStarted == true){
+            return true;
+        }
+        return false;
+    }
 
-    bool checkGameCompletion(){
+    public bool checkEndOfCleanDishes(){
+            if(emptyDishwasherScript.emptyDishesFinished == true){
+                return true;
+            }
+            return false;
+        }
+
+//2 dirtydishes
+public bool checkStartOfDirtyDishes(){
+        if(fillDishwasherScript.fillDishesStarted == true){
+            return true;
+        }
+        return false;
+    }
+
+    public bool checkEndOfDirtyDishes(){
+            if(fillDishwasherScript.fillDishesFinished == true){
+                return true;
+            }
+            return false;
+        }
+//3 sorting
+// 4 serving
+//5piling
+
+//6 drawing
+
+
+
+
+    public bool checkGameCompletion(){
         if(fillDishwasherScript.targetZoneFull 
         && emptyDishwasherScript.targetZoneFull
         && sortTaskScript.IsSortingCompleted()

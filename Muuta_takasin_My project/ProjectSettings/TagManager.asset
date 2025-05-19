@@ -8,6 +8,10 @@ TagManager:
   - Stack
   - Mug
   - Hand
+  - MugWashed
+  - PlateDirty
+  - PlateWashed
+  - menu_UI
   layers:
   - Default
   - TransparentFX
