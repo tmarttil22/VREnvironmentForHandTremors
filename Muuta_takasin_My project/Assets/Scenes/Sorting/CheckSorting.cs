@@ -14,10 +14,14 @@ public class CheckSorting : MonoBehaviour
     private SortHandler sortHandler4;
     public GameObject platform5;
     private SortHandler sortHandler5;
+    public GameObject platform6;
+    private SortHandler sortHandler6;
+    public GameObject platform7;
+    private SortHandler sortHandler7;
 
     private SortHandler[] sortHandlers;
 
-    public int totalCount = 5;
+    public int totalCount = 7;
     private int correctCount = 0;
     private bool sortingCompleted = false;
 
@@ -26,12 +30,14 @@ public class CheckSorting : MonoBehaviour
     {
         taskCompletionHandler = taskCompletionObject.GetComponent<TaskCompletionHandler>();
 
-        sortHandlers = new SortHandler[5];
+        sortHandlers = new SortHandler[totalCount];
         sortHandlers[0] = platform1.GetComponent<SortHandler>();
         sortHandlers[1] = platform2.GetComponent<SortHandler>();
         sortHandlers[2] = platform3.GetComponent<SortHandler>();
         sortHandlers[3] = platform4.GetComponent<SortHandler>();
         sortHandlers[4] = platform5.GetComponent<SortHandler>();
+        sortHandlers[5] = platform6.GetComponent<SortHandler>();
+        sortHandlers[6] = platform7.GetComponent<SortHandler>();
     }
 
     // Update is called once per frame

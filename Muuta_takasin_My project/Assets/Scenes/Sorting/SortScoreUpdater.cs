@@ -16,6 +16,6 @@ public class SortScoreUpdater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = string.Format("{0}/5", checkSorting.GetCorrectCount());
+        text.text = string.Format("{0}/7", checkSorting.GetCorrectCount());
     }
 }
