@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameMenuManager : MonoBehaviour
@@ -20,14 +21,12 @@ public class GameMenuManager : MonoBehaviour
     void Start()
     {
         menuShown = false;
-        Button quit_button = gameObject.GetComponent<Button>();
-        quit_button.onClick.AddListener(TaskOnClick_Quit);
 
-        Button resume_button = gameObject.GetComponent<Button>();
-        resume_button.onClick.AddListener(TaskOnClick_Resume);
+        quitButton.onClick.AddListener(TaskOnClick_Quit);
 
-        Button restart_button = gameObject.GetComponent<Button>();
-        restart_button.onClick.AddListener(TaskOnClick_Restart);
+        resumeButton.onClick.AddListener(TaskOnClick_Resume);
+
+        restartButton.onClick.AddListener(TaskOnClick_Restart);
     }
 
     // Update is called once per frame
@@ -55,7 +54,7 @@ public class GameMenuManager : MonoBehaviour
     }
     void TaskOnClick_Restart()
     {
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void menuOrientation()
