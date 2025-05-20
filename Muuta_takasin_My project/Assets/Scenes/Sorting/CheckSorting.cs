@@ -23,7 +23,9 @@ public class CheckSorting : MonoBehaviour
 
     public int totalCount = 7;
     private int correctCount = 0;
+    private bool sortingStarted = false;
     private bool sortingCompleted = false;
+    private float startTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -51,7 +53,14 @@ public class CheckSorting : MonoBehaviour
             }
         }
 
-        if (correctCount == totalCount) {
+        if (!sortingStarted && correctCount > 0)
+        {
+            sortingStarted = true;
+            startTime = Time.time;
+        }
+
+        if (correctCount == totalCount)
+        {
             taskCompletionHandler.SetAsCompleted();
 
             SetSortingCompleted();
@@ -66,7 +75,24 @@ public class CheckSorting : MonoBehaviour
         sortingCompleted = true;
     }
 
-    public bool IsSortingCompleted() {
+    public bool IsSortingStarted()
+    {
+        return sortingStarted;
+    }
+
+    public bool IsSortingCompleted()
+    {
+        if (sortingCompleted)
+        {
+            return true;
+        }
+
+        if (sortingStarted && Time.time - startTime > 120)
+        {
+            SetSortingCompleted();
+            taskCompletionHandler.SetAsCompleted();
+            Debug.Log("Time ran out");
+        }
         return sortingCompleted;
     }
 }

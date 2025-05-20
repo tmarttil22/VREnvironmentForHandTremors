@@ -22,8 +22,9 @@ public class HoloTaskHandler : MonoBehaviour
     public GameObject taskCompletionObject;
     private TaskCompletionHandler taskCompletionHandler;
 
-
+    private bool taskStarted = false;
     private bool taskCompleted = false;
+    private float startTime;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -43,7 +44,24 @@ public class HoloTaskHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!taskCompleted) {
+        if (!taskStarted)
+        {
+            if (mugHoloChecker.GetIsInside()
+            || potHoloChecker.GetIsInside()
+            || plateHoloChecker.GetIsInside()
+            || bowlHoloChecker.GetIsInside()
+            || breadHoloChecker.GetIsInside()
+            || milkHoloChecker.GetIsInside()
+            || ketchupHoloChecker.GetIsInside()
+            || mustardHoloChecker.GetIsInside())
+            {
+                taskStarted = true;
+                startTime = Time.time;
+            }
+        }
+
+        if (!taskCompleted)
+        {
             if (mugHoloChecker.GetIsInside()
             && potHoloChecker.GetIsInside()
             && plateHoloChecker.GetIsInside()
@@ -52,14 +70,30 @@ public class HoloTaskHandler : MonoBehaviour
             && milkHoloChecker.GetIsInside()
             && ketchupHoloChecker.GetIsInside()
             && mustardHoloChecker.GetIsInside()
-            ) {
+            )
+            {
                 taskCompleted = true;
                 taskCompletionHandler.SetAsCompleted();
             }
         }
     }
 
-    public bool IsServingCompleted() {
+    public bool IsServingStarted()
+    {
+        return taskStarted;
+    }
+    public bool IsServingCompleted()
+    {
+        if (taskCompleted)
+        {
+            return true;
+        }
+
+        if (taskStarted && Time.time - startTime > 120)
+        {
+            taskCompleted = true;
+            Debug.Log("Time ran out");
+        }
         return taskCompleted;
     }
 }

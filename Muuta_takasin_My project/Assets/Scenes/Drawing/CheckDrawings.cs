@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class CheckDrawings : MonoBehaviour
 {
+    private bool drawingStarted = false;
     private bool drawingCompleted = false;
+    private float startTime;
 
     public Whiteboard squareDrawing;
     public Whiteboard circleDrawing;
@@ -17,21 +19,48 @@ public class CheckDrawings : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!drawingCompleted) 
+        if (!drawingStarted)
+        {
+            if (squareDrawing.IsTouched()
+            || circleDrawing.IsTouched()
+            || starDrawing.IsTouched()
+            || finalDrawing.IsTouched())
+            {
+                drawingStarted = true;
+                startTime = Time.time;
+            }
+        }
+
+        if (!drawingCompleted)
         {
 
-            if (squareDrawing.IsTouched() 
+            if (squareDrawing.IsTouched()
             && circleDrawing.IsTouched()
             && starDrawing.IsTouched()
             && finalDrawing.IsTouched()
-            ) 
+            )
             {
                 drawingCompleted = true;
             }
         }
     }
 
-    public bool IsDrawingCompleted() {
+    public bool IsDrawingStarted()
+    {
+        return drawingStarted;
+    }
+    public bool IsDrawingCompleted()
+    {
+        if (drawingCompleted)
+        {
+            return true;
+        }
+
+        if (drawingStarted && Time.time - startTime > 120)
+        {
+            drawingCompleted = true;
+            Debug.Log("Time ran out");
+        }
         return drawingCompleted;
     }
 }

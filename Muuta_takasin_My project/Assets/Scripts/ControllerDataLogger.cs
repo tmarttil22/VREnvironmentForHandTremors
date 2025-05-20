@@ -127,31 +127,45 @@ public class ControllerDataLogger : MonoBehaviour
                 writer.WriteLine("Fill dishwasher end");
                 dirtyDishesFinishedLogged = true;
             }
+
             //3
+            if (!sortingStartedLogged && progressTracker.checkStartOfSorting())
+            {
+                writer.WriteLine("Sorting start");
+                sortingStartedLogged = true;
+            }
+            
+            if (!sortingFinishedLogged && progressTracker.checkEndOfSorting())
+            {
+                writer.WriteLine("Sorting end");
+                sortingFinishedLogged = true;
+            }
+
             //4
+            if (!servingStartedLogged && progressTracker.checkStartOfServing())
+            {
+                writer.WriteLine("Serving start");
+                servingStartedLogged = true;
+            }
+            
+            if (!servingFinishedLogged && progressTracker.checkEndOfServing())
+            {
+                writer.WriteLine("Serving end");
+                servingFinishedLogged = true;
+            }
+
             //5
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            if (!drawingStartedLogged && progressTracker.checkStartOfDrawing())
+            {
+                writer.WriteLine("Drawing start");
+                drawingStartedLogged = true;
+            }
+            
+            if (!drawingFinishedLogged && progressTracker.checkEndOfDrawing())
+            {
+                writer.WriteLine("Drawing end");
+                drawingFinishedLogged = true;
+            }
 
 
 
