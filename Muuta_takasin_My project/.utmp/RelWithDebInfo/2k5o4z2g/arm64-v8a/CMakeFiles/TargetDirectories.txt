@@ -1,0 +1,5 @@
+C:/Users/Valvoja/Documents/++++++++KandiTestEnvirnment/VREnvironmentForHandTremors/Muuta_takasin_My project/.utmp/RelWithDebInfo/2k5o4z2g/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Valvoja/Documents/++++++++KandiTestEnvirnment/VREnvironmentForHandTremors/Muuta_takasin_My project/.utmp/RelWithDebInfo/2k5o4z2g/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/Valvoja/Documents/++++++++KandiTestEnvirnment/VREnvironmentForHandTremors/Muuta_takasin_My project/.utmp/RelWithDebInfo/2k5o4z2g/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/Valvoja/Documents/++++++++KandiTestEnvirnment/VREnvironmentForHandTremors/Muuta_takasin_My project/.utmp/RelWithDebInfo/2k5o4z2g/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/Valvoja/Documents/++++++++KandiTestEnvirnment/VREnvironmentForHandTremors/Muuta_takasin_My project/.utmp/RelWithDebInfo/2k5o4z2g/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir

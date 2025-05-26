@@ -8,10 +8,10 @@ public class ControllerDataLogger : MonoBehaviour
 {
     public string controllerSide = "Right"; // Set to "Left" or "Right" in Inspector
 
-    private class LogEntry
+    private class LogEntry  //contains log entries for activities made in the unity vr simulation
     {
-        public double timestamp;
-        public string controller_side;
+        public double timestamp;    
+        public string controller_side_or_job_label; //string entry for log entry, can contain any log relevant string 
         public float position_x;
         public float position_y;
         public float position_z;
@@ -19,7 +19,7 @@ public class ControllerDataLogger : MonoBehaviour
         public float rotation_y;
         public float rotation_z;
     }
-    
+
     public string fileName = "Subject_";
     private List<LogEntry> buffer = new List<LogEntry>();
     private string filePath;
@@ -80,12 +80,76 @@ public class ControllerDataLogger : MonoBehaviour
         // Record data
         Vector3 pos = transform.position;
         Vector3 rot = transform.eulerAngles;
-    //    double timeInS = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+        //double timeInS = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         double timeInS = Time.time;
+
+        //check for job start and stop labels before writing positions 
+        if (!cleanDishesStartedLogged && progressTracker.checkStartOfCleanDishes())
+        {
+            buffer.Add(new LogEntry{controller_side_or_job_label = "Empty dishwasher start"});
+            cleanDishesStartedLogged = true;
+        }
+            if(!cleanDishesFinishedLogged &&progressTracker.checkEndOfCleanDishes()){
+            buffer.Add(new LogEntry{controller_side_or_job_label = "Empty dishwasher end"});
+            cleanDishesFinishedLogged = true;
+        }
+        //2
+        if(!dirtyDishesStartedLogged &&progressTracker.checkStartOfDirtyDishes()){
+            buffer.Add(new LogEntry{controller_side_or_job_label = "Fill dishwasher start"});
+            dirtyDishesStartedLogged = true;
+        }
+            if(!dirtyDishesFinishedLogged &&progressTracker.checkEndOfDirtyDishes()){
+            buffer.Add(new LogEntry{controller_side_or_job_label = "Fill dishwasher end"});
+            dirtyDishesFinishedLogged = true;
+        }
+
+        //3
+        if (!sortingStartedLogged && progressTracker.checkStartOfSorting())
+        {
+            buffer.Add(new LogEntry{controller_side_or_job_label = "Sorting start"});
+            sortingStartedLogged = true;
+        }
+        
+        if (!sortingFinishedLogged && progressTracker.checkEndOfSorting())
+        {
+            buffer.Add(new LogEntry{controller_side_or_job_label = "Sorting end"});
+            sortingFinishedLogged = true;
+        }
+
+        //4
+        if (!servingStartedLogged && progressTracker.checkStartOfServing())
+        {
+            buffer.Add(new LogEntry{controller_side_or_job_label = "Serving start"});
+            servingStartedLogged = true;
+        }
+        
+        if (!servingFinishedLogged && progressTracker.checkEndOfServing())
+        {
+            buffer.Add(new LogEntry{controller_side_or_job_label = "Serving end"});
+            servingFinishedLogged = true;
+        }
+
+        //5
+        if (!drawingStartedLogged && progressTracker.checkStartOfDrawing())
+        {
+            buffer.Add(new LogEntry{controller_side_or_job_label = "Drawing start"});
+            drawingStartedLogged = true;
+        }
+        
+        if (!drawingFinishedLogged && progressTracker.checkEndOfDrawing())
+        {
+            buffer.Add(new LogEntry{controller_side_or_job_label = "Drawing end"});
+            drawingFinishedLogged = true;
+        }
+
+      //labeling ends here
+
+
+
         buffer.Add(new LogEntry
         {
             timestamp = timeInS,
-            controller_side = controllerSide,
+            controller_side_or_job_label = controllerSide,
             position_x = pos.x,
             position_y = pos.y,
             position_z = pos.z,
@@ -110,7 +174,9 @@ public class ControllerDataLogger : MonoBehaviour
         {
             //my modifications xr disorders -AA
             //1
-            if(!cleanDishesStartedLogged &&progressTracker.checkStartOfCleanDishes()){
+            /*
+            if (!cleanDishesStartedLogged && progressTracker.checkStartOfCleanDishes())
+            {
                 writer.WriteLine("Empty dishwasher start");
                 cleanDishesStartedLogged = true;
             }
@@ -167,18 +233,18 @@ public class ControllerDataLogger : MonoBehaviour
                 drawingFinishedLogged = true;
             }
 
-
+*/
 
             //////////////////////
             if (writeHeader)
             {
-                writer.WriteLine("timestamp,controller_side,position_x,position_y,position_z,rotation_x,rotation_y,rotation_z");
+                writer.WriteLine("timestamp,controller_side_or_job_label,position_x,position_y,position_z,rotation_x,rotation_y,rotation_z");
                 fileInitialized = true;
             }
 
             foreach (var entry in buffer)
             {
-                writer.WriteLine($"{entry.timestamp},{entry.controller_side},{entry.position_x},{entry.position_y},{entry.position_z},{entry.rotation_x},{entry.rotation_y},{entry.rotation_z}");
+                writer.WriteLine($"{entry.timestamp},{entry.controller_side_or_job_label},{entry.position_x},{entry.position_y},{entry.position_z},{entry.rotation_x},{entry.rotation_y},{entry.rotation_z}");
             }
         }
 

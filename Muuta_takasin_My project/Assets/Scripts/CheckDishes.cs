@@ -95,7 +95,7 @@ public class CheckDishes : MonoBehaviour
             emptyDishesFinished = true;
             taskCompletionHandler.SetAsCompleted();
             //Debug.Log("Task finished");
-        }else if (Time.time-startTime>120){//2 minutes has passed, ,move on 
+        }else if (hasStarted && Time.time-startTime>120){//2 minutes has passed, ,move on 
             targetZoneFull = true;
             emptyDishesFinished = true;
             taskCompletionHandler.SetAsCompleted();

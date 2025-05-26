@@ -1,0 +1,10 @@
+# ninja log v5
+226	826	7697052344278313	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	e3510fb0e02efe24
+209	845	7697052344448326	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	a2a9791b2011761e
+191	858	7697052344579752	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	f0a34e6ffeab22ca
+236	863	7697052344659753	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	552a1065b1bfe22c
+218	900	7697052344999748	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	82930c87901f610b
+184	925	7697052345269757	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	5514f90ab2590af4
+200	1023	7697052346250786	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	c140a54a73b3706b
+0	1101	7697052347031267	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	5d66dc8c05ab4a1a
+1102	1531	7697052351012640	C:/Users/Valvoja/Documents/++++++++KandiTestEnvirnment/VREnvironmentForHandTremors/Muuta_takasin_My project/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2k5o4z2g/obj/arm64-v8a/libgame.so	90ba337636ae344e

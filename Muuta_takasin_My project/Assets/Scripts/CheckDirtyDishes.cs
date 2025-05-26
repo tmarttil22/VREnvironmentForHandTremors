@@ -88,7 +88,7 @@ public bool CheckStart(){
             targetZoneFull = true;
             fillDishesFinished = true;
             taskCompletionHandler.SetAsCompleted();
-        }else if (Time.time-startTime>120){//2 minutes has passed, ,move on 
+        }else if (hasStarted && Time.time-startTime>120){//2 minutes has passed, ,move on 
             targetZoneFull = true;
             fillDishesFinished = true;
             taskCompletionHandler.SetAsCompleted();
