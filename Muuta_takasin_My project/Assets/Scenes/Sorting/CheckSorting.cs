@@ -47,8 +47,10 @@ public class CheckSorting : MonoBehaviour
     {
         correctCount = 0;
 
-        foreach (SortHandler sort in sortHandlers) {
-            if (sort.GetIsCorrect()) {
+        foreach (SortHandler sort in sortHandlers)
+        {
+            if (sort.GetIsCorrect())
+            {
                 correctCount++;
             }
         }
@@ -67,11 +69,13 @@ public class CheckSorting : MonoBehaviour
         }
     }
 
-    public int GetCorrectCount() {
+    public int GetCorrectCount()
+    {
         return correctCount;
     }
 
-    private void SetSortingCompleted() {
+    private void SetSortingCompleted()
+    {
         sortingCompleted = true;
     }
 
@@ -95,4 +99,5 @@ public class CheckSorting : MonoBehaviour
         }
         return sortingCompleted;
     }
+
 }

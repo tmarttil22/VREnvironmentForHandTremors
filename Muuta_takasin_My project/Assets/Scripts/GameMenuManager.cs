@@ -7,6 +7,7 @@ public class GameMenuManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+    /*This class adds functionality to the game menu which controlls behaviour of restart, resume and quit buttons.*/
     public GameObject menu;
     public GameObject playerHead;
     bool menuShown;
@@ -22,11 +23,9 @@ public class GameMenuManager : MonoBehaviour
     void Start()
     {
         menuShown = false;
-
+        /*Add listeners for the buttons so callback is activated to the corresponding function when needed.*/
         quitButton.onClick.AddListener(TaskOnClick_Quit);
-
         resumeButton.onClick.AddListener(TaskOnClick_Resume);
-
         restartButton.onClick.AddListener(TaskOnClick_Restart);
     }
 
@@ -40,24 +39,25 @@ public class GameMenuManager : MonoBehaviour
         }
 
     }
-
+/*This function shuts down the Unity application. If application is running in Unity editor then editor shuts down with the compiler command.*/
     void TaskOnClick_Quit()
     {
         Application.Quit();
-
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
+    #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+    #endif
     }
+    /*This function hides the game menu.*/
      void TaskOnClick_Resume()
     {
         menu.SetActive(!menu.activeSelf);
     }
+    /*Calling this fucntion reloads and restarts the current scene in the unity. */
     void TaskOnClick_Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
+    /*This method checks orientation and sets distance for the menu if MENU-button is pressed.*/
     void menuOrientation()
     {
         menu.transform.position =

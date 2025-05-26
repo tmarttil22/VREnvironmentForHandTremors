@@ -30,6 +30,7 @@ public class CheckDishes : MonoBehaviour
     public TaskStartChecker mug1;
     public TaskStartChecker mug2;
     public TaskStartChecker mug3;
+    public EndScreenManager endScreenManager;
 
     float startTime;
     float endTime;
@@ -37,7 +38,7 @@ public class CheckDishes : MonoBehaviour
     void Start()
     {
         hasStarted = false;
-        taskCompletionHandler = taskCompletionObject.GetComponent<TaskCompletionHandler>(); 
+        taskCompletionHandler = taskCompletionObject.GetComponent<TaskCompletionHandler>();
         plateCount = 0;
         mugCount = 0;
         targetZoneFull = false;
@@ -45,7 +46,7 @@ public class CheckDishes : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         CheckStart();
         CheckCompletion();
     }
@@ -54,9 +55,10 @@ public class CheckDishes : MonoBehaviour
     {
         if (other.gameObject.name == "PlateD")
         {
-            plateCount++ ;
+            plateCount++;
         }
-        else if (other.gameObject.name == "MugD"){
+        else if (other.gameObject.name == "MugD")
+        {
             mugCount++;
         }
     }
@@ -64,48 +66,66 @@ public class CheckDishes : MonoBehaviour
     {
         if (other.gameObject.name == "PlateD")
         {
-            plateCount-- ;
+            plateCount--;
         }
-        else if (other.gameObject.name == "MugD"){
+        else if (other.gameObject.name == "MugD")
+        {
             mugCount--;
         }
     }
 
-    public bool CheckStart(){
-        if(hasStarted){
+    public bool CheckStart()
+    {
+        if (hasStarted)
+        {
             return true; //if flagged as started then return
         }
-        else if( // if not flagged, lets check 
-            plate1.objectHasMoved||plate2.objectHasMoved
-          ||plate3.objectHasMoved||plate4.objectHasMoved
-          ||plate5.objectHasMoved||plate6.objectHasMoved
-          ||mug1.objectHasMoved||mug2.objectHasMoved||mug3.objectHasMoved){
+        else if ( // if not flagged, lets check 
+            plate1.objectHasMoved || plate2.objectHasMoved
+          || plate3.objectHasMoved || plate4.objectHasMoved
+          || plate5.objectHasMoved || plate6.objectHasMoved
+          || mug1.objectHasMoved || mug2.objectHasMoved || mug3.objectHasMoved)
+        {
             hasStarted = true;
             emptyDishesStarted = true;
             startTime = Time.time;
             return true;
-          }
-            return false;
         }
-    
+        return false;
+    }
 
-    public void CheckCompletion(){
-        if (plateCount == targetPlateCount && mugCount == targetMugCount){
+
+    public void CheckCompletion()
+    {
+        if (plateCount == targetPlateCount && mugCount == targetMugCount)
+        {
             targetZoneFull = true;
             emptyDishesFinished = true;
             taskCompletionHandler.SetAsCompleted();
+            showEndScreen();
             //Debug.Log("Task finished");
-        }else if (hasStarted && Time.time-startTime>120){//2 minutes has passed, ,move on 
+        }
+        else if (hasStarted && Time.time - startTime > 120)
+        {//2 minutes has passed, ,move on 
             targetZoneFull = true;
             emptyDishesFinished = true;
             taskCompletionHandler.SetAsCompleted();
+            showEndScreen();
             Debug.Log("Time ran out");
         }
-        else{
+        else
+        {
             targetZoneFull = false;
         }
     }
-    public int checkProgress(){
-        return plateCount+mugCount;
+    public int checkProgress()
+    {
+        return plateCount + mugCount;
+    }
+    
+
+    private void showEndScreen()
+    {
+        endScreenManager.menuShown = true;
     }
 }

@@ -27,18 +27,23 @@ public class HeightUpdater : MonoBehaviour
     {
         maxY = float.MinValue;
 
-        foreach (GameObject go in objects) {
-            if (go.transform.position[1] > maxY) {
+        foreach (GameObject go in objects)
+        {
+            if (go.transform.position[1] > maxY)
+            {
                 maxY = go.transform.position[1];
             }
         }
 
         height = maxY - offSet + blockHeight;
 
-        if (height >= targetHeight) {
+        if (height >= targetHeight)
+        {
             taskCompletionHandler.SetAsCompleted();
         }
 
         text.text = string.Format("Height: {0:0.00} m", height);
     }
+    
+
 }

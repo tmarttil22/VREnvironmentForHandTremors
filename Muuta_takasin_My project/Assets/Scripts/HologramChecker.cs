@@ -5,6 +5,8 @@ using UnityEngine;
 public class HologramChecker : MonoBehaviour
 {
 
+
+    
     public Collider[] hologramColliders;
     public GameObject target;
     public float overlapThreshold = 0.80f;
@@ -48,18 +50,24 @@ public class HologramChecker : MonoBehaviour
         float overlapRatio = (float)insideCount / targetColliders.Length;
 
         isInside = overlapRatio >= overlapThreshold;
-        if (isInside) {
+        if (isInside)
+        {
             // ADD LOGIC ON WHAT TO DO WHEN OBJECT IS MOSTLY INSIDE
             //Debug.Log("Object is at least 80% inside the hologram");
             ObjectText.text = "";
-        } else {
+        }
+        else
+        {
             ObjectText.text = target.name;
         }
         //ObjectText.text = target.name + " in place: " + isInside + ", Percentage: " + Mathf.Round(overlapRatio * 100) + "%";
-        
+
     }
 
-    public bool GetIsInside() {
+    public bool GetIsInside()
+    {
         return isInside;
     }
+    
+
 }

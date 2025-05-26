@@ -13,7 +13,7 @@ public class CheckDrawings : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -59,8 +59,10 @@ public class CheckDrawings : MonoBehaviour
         if (drawingStarted && Time.time - startTime > 120)
         {
             drawingCompleted = true;
+            
             Debug.Log("Time ran out");
         }
         return drawingCompleted;
     }
+    
 }
