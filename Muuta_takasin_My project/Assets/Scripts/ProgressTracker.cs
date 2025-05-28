@@ -13,7 +13,8 @@ public class ProgressTracker : MonoBehaviour
 
     public CheckDishes emptyDishwasherScript;
 
-
+    private string lastDrawing = "";
+    private string currentDrawing = "";
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -100,8 +101,14 @@ public class ProgressTracker : MonoBehaviour
         return drawTaskScript.IsDrawingCompleted();
     }
 
-
-
+    public string checkIndividualDrawingState()
+    {
+        if (drawTaskScript.HasDrawingStateChanged())
+        {
+            return drawTaskScript.GetCurrentDrawingState();
+        }
+        return "";
+    }
 
     public bool checkGameCompletion()
     {

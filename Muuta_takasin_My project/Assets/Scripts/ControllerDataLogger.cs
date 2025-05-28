@@ -138,8 +138,18 @@ public class ControllerDataLogger : MonoBehaviour
         
         if (!drawingFinishedLogged && progressTracker.checkEndOfDrawing())
         {
-            buffer.Add(new LogEntry{controller_side_or_job_label = "Drawing end"});
+            buffer.Add(new LogEntry { controller_side_or_job_label = "Drawing end" });
             drawingFinishedLogged = true;
+        }
+
+        if (drawingStartedLogged && !drawingFinishedLogged)
+        {
+            //Log when individual drawing started and ended
+            string drawingState = progressTracker.checkIndividualDrawingState();
+            if (drawingState != "")
+            {
+                buffer.Add(new LogEntry { controller_side_or_job_label = drawingState });
+            }
         }
 
       //labeling ends here

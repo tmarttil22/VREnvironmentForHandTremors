@@ -10,6 +10,15 @@ public class CheckDrawings : MonoBehaviour
     public Whiteboard circleDrawing;
     public Whiteboard starDrawing;
     public Whiteboard finalDrawing;
+    public WhiteboardMarker marker;
+    public TaskCompletionHandler taskCompletionHandler;
+    private string currentDrawingName = "";
+    private string lastDrawingName = "";
+    private string drawingName = "";
+
+    private bool drawingStateChanged = false;
+    private string drawingState = "";
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +42,23 @@ public class CheckDrawings : MonoBehaviour
 
         if (!drawingCompleted)
         {
+            currentDrawingName = marker.GetCurrentDrawingName();
+
+            drawingStateChanged = (lastDrawingName != currentDrawingName);
+
+            if (drawingStateChanged)
+            {
+                if (lastDrawingName == "")
+                {
+                    drawingState = " start";
+                    drawingName = currentDrawingName;
+                }
+                else if (currentDrawingName == "")
+                {
+                    drawingState = " end";
+                    drawingName = lastDrawingName;
+                }
+            }
 
             if (squareDrawing.IsTouched()
             && circleDrawing.IsTouched()
@@ -41,7 +67,10 @@ public class CheckDrawings : MonoBehaviour
             )
             {
                 drawingCompleted = true;
+                taskCompletionHandler.SetAsCompleted();
             }
+
+            lastDrawingName = currentDrawingName;
         }
     }
 
@@ -49,6 +78,7 @@ public class CheckDrawings : MonoBehaviour
     {
         return drawingStarted;
     }
+
     public bool IsDrawingCompleted()
     {
         if (drawingCompleted)
@@ -59,10 +89,23 @@ public class CheckDrawings : MonoBehaviour
         if (drawingStarted && Time.time - startTime > 120)
         {
             drawingCompleted = true;
-            
+            taskCompletionHandler.SetAsCompleted();
+
             Debug.Log("Time ran out");
         }
         return drawingCompleted;
     }
-    
+
+    public string GetCurrentDrawingState()
+    {
+        if (!drawingStateChanged)
+        {
+            return "";
+        }
+        return drawingName + drawingState;
+    }
+
+    public bool HasDrawingStateChanged() {
+        return drawingStateChanged;
+    }
 }

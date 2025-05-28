@@ -18,17 +18,13 @@ public class WhiteboardMarker : MonoBehaviour
     private bool touchedLastFrame;
     //private Quaternion lastTouchRot;
 
-    public GameObject taskCompletionObject;
-    private TaskCompletionHandler taskCompletionHandler;
-    private bool taskCompleted = false;
+    private string currentWhiteboardName = "";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        taskCompletionHandler = taskCompletionObject.GetComponent<TaskCompletionHandler>();
-
         r = tip.GetComponent<Renderer>();
-        colors = Enumerable.Repeat(r.material.color, penSize*penSize).ToArray();
+        colors = Enumerable.Repeat(r.material.color, penSize * penSize).ToArray();
         tipHeight = (tip.localScale.y / 2);
     }
 
@@ -38,21 +34,22 @@ public class WhiteboardMarker : MonoBehaviour
         Draw();
     }
 
-    private void Draw() {
-        if (Physics.Raycast(tip.position, transform.up, out touch, tipHeight)) {
+    private void Draw()
+    {
+        if (Physics.Raycast(tip.position, transform.up, out touch, tipHeight))
+        {
 
-            if (touch.transform.CompareTag("Whiteboard")) {
+            if (touch.transform.CompareTag("Whiteboard"))
+            {
 
-                if (!taskCompleted) {
-                    taskCompletionHandler.SetAsCompleted();
-                    taskCompleted = true;
-                }
-
-                if (whiteboard == null) {
+                if (whiteboard == null)
+                {
                     whiteboard = touch.transform.GetComponent<Whiteboard>();
+                    currentWhiteboardName = whiteboard.GetDrawingName();
                 }
 
-                if (!whiteboard.IsTouched()) {
+                if (!whiteboard.IsTouched())
+                {
                     whiteboard.SetAsTouched();
                 }
 
@@ -61,15 +58,18 @@ public class WhiteboardMarker : MonoBehaviour
                 var x = (int)(touchPos.x * whiteboard.textureSize.x - (penSize / 2));
                 var y = (int)(touchPos.y * whiteboard.textureSize.y - (penSize / 2));
 
-                if (y < 0 || y > whiteboard.textureSize.y || x < 0 || x > whiteboard.textureSize.x) {
+                if (y < 0 || y > whiteboard.textureSize.y || x < 0 || x > whiteboard.textureSize.x)
+                {
                     return;
                 }
 
-                if (touchedLastFrame) {
-                    
+                if (touchedLastFrame)
+                {
+
                     whiteboard.texture.SetPixels(x, y, penSize, penSize, colors);
 
-                    for (float f = 0.01f; f < 1.00f; f += 0.01f) {
+                    for (float f = 0.01f; f < 1.00f; f += 0.01f)
+                    {
 
                         var lerpX = (int)Mathf.Lerp(lastTouchPos.x, x, f);
                         var lerpY = (int)Mathf.Lerp(lastTouchPos.y, y, f);
@@ -91,5 +91,11 @@ public class WhiteboardMarker : MonoBehaviour
 
         whiteboard = null;
         touchedLastFrame = false;
+        currentWhiteboardName = "";
+    }
+
+    public string GetCurrentDrawingName()
+    {
+        return currentWhiteboardName;
     }
 }

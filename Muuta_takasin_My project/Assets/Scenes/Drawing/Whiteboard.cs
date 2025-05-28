@@ -5,6 +5,7 @@ public class Whiteboard : MonoBehaviour
 {
     public Texture2D texture;
     public Vector2 textureSize = new Vector2(512, 512);
+    public string drawingName = "";
 
     private bool isTouched = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,10 +29,16 @@ public class Whiteboard : MonoBehaviour
         renderer.material.mainTexture = texture;
     }
 
-    public void SetAsTouched() {
+    public void SetAsTouched()
+    {
         isTouched = true;
     }
-    public bool IsTouched() {
+    public bool IsTouched()
+    {
         return isTouched;
+    }
+    public string GetDrawingName()
+    {
+        return drawingName;
     }
 }
