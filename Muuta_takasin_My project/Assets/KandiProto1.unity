@@ -83351,6 +83351,7 @@ GameObject:
   - component: {fileID: 1808926948}
   - component: {fileID: 1808926947}
   - component: {fileID: 1808926949}
+  - component: {fileID: 1808926950}
   m_Layer: 0
   m_Name: Task finished audiovisuals
   m_TagString: Untagged
@@ -83412,7 +83413,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c357f18c371018746bdde076806c4d57, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: c357f18c371018746bdde076806c4d57, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -83499,6 +83500,35 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1808926950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808926946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e98b06dc624e44882b5c820877a532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  servingItems: {fileID: 814602990}
+  drawing: {fileID: 1747521771}
+  serving: {fileID: 1688838117}
+  stacking: {fileID: 100562619}
+  stackingNum: {fileID: 1906595852}
+  sorting: {fileID: 1187696009}
+  sortingNum: {fileID: 736556676}
+  kitchenSink: {fileID: 99872732}
+  kitchenSinkNum: {fileID: 1390503582}
+  dishwasher: {fileID: 1781520086}
+  dishwasherNum: {fileID: 851650600}
+  tableSetObject: {fileID: 892369042}
+  sortingObject: {fileID: 1908434935}
+  drawingObject: {fileID: 609981376}
+  stackingObject: {fileID: 638951766}
+  emptyDishWasherObject: {fileID: 541245043}
+  fillDishWasherObject: {fileID: 1240589294}
 --- !u!1 &1811431474
 GameObject:
   m_ObjectHideFlags: 0
@@ -84095,7 +84125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tremorFrequency: 10
-  tremorAmplitude: 0.075
+  tremorAmplitude: 0.05
   affectRotation: 0
   rotationAmplitude: 0.5
 --- !u!4 &1825653340 stripped
@@ -88141,7 +88171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tremorFrequency: 10
-  tremorAmplitude: 0.075
+  tremorAmplitude: 0.05
   affectRotation: 0
   rotationAmplitude: 0.5
 --- !u!1 &1952914267
