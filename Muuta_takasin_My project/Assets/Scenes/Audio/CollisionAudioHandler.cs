@@ -16,9 +16,9 @@ public class CollisionAudioHandler : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer != ignoreLayer1 && 
-            collision.gameObject.layer != ignoreLayer2)
+            collision.gameObject.layer != ignoreLayer2 &&
+            !collisionAudio.isPlaying)
         {
-            
             collisionAudio.Play();
 
         }
