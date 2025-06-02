@@ -2,11 +2,19 @@ using UnityEngine;
 
 public class EssentialTremor : MonoBehaviour
 {
+    public ExperimentSettings experimentSettings;
+
     [Header("Tremor Settings")]
     public float tremorFrequency = 10f;
     public float tremorAmplitude = 0.002f;
     public bool affectRotation = false;
     public float rotationAmplitude = 0.5f;
+
+    void Start()
+    {
+        tremorFrequency = experimentSettings.tremorFrequency;
+        tremorAmplitude = experimentSettings.tremorAmplitude;
+    }
 
     void LateUpdate()
     {

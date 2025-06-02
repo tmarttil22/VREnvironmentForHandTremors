@@ -30,6 +30,8 @@ public class ControllerDataLogger : MonoBehaviour
 //my modifications for XR movewment disorders - Akseli
     public ProgressTracker progressTracker;
 
+    public ExperimentSettings experimentSettings;
+
     //1
     private bool cleanDishesStartedLogged;
     private bool cleanDishesFinishedLogged;   
@@ -47,8 +49,21 @@ public class ControllerDataLogger : MonoBehaviour
     private bool drawingFinishedLogged;
 
 
+    public void ItemGrabbed(string name)
+    {
+        buffer.Add(new LogEntry{controller_side_or_job_label = name + " grabbed"});
+    }
+
+    public void ItemDropped(string name)
+    {
+        buffer.Add(new LogEntry{controller_side_or_job_label = name + " dropped"});
+    }
+
     void Start()
     {
+        //Get participant id from settings
+        fileName = experimentSettings.ParticipantID;
+
         string path = Application.dataPath + "/Log/";
         fileName = $"{fileName}_{controllerSide}_{DateTime.UtcNow:yyyyMMdd_HHmmss}.csv";
         filePath = path + fileName;
