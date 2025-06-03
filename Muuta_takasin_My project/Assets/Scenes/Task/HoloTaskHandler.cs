@@ -92,6 +92,7 @@ public class HoloTaskHandler : MonoBehaviour
         if (taskStarted && Time.time - startTime > 120)
         {
             taskCompleted = true;
+            taskCompletionHandler.SetAsCompleted();
             Debug.Log("Time ran out");
         }
         return taskCompleted;
