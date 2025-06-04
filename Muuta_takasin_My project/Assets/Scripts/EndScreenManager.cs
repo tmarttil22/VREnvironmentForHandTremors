@@ -19,12 +19,12 @@ public class EndScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (menuShown&&!isShowingMenu)
+       /* if (menuShown&&!isShowingMenu)
         {
             
             menuShown = false;
             StartCoroutine(showJobEnd());
-        }
+        }*/
     }
     void menuOrientation()
     {

@@ -13,6 +13,8 @@ public class GameMenuManager : MonoBehaviour
     bool menuShown;
     public InputActionProperty menuButton;
 
+    public GameObject raycasterLeft;
+    public GameObject raycasterRight;
     //menu ui 
     public Button quitButton;
     public Button resumeButton;
@@ -36,6 +38,8 @@ public class GameMenuManager : MonoBehaviour
         {
             menuOrientation();
             menu.SetActive(!menu.activeSelf);
+            raycasterLeft.SetActive(!raycasterLeft.activeSelf);
+            raycasterRight.SetActive(!raycasterRight.activeSelf);
         }
 
     }
@@ -48,9 +52,11 @@ public class GameMenuManager : MonoBehaviour
     #endif
     }
     /*This function hides the game menu.*/
-     void TaskOnClick_Resume()
+    void TaskOnClick_Resume()
     {
         menu.SetActive(!menu.activeSelf);
+        raycasterLeft.SetActive(!raycasterLeft.activeSelf);
+        raycasterRight.SetActive(!raycasterRight.activeSelf);
     }
     /*Calling this fucntion reloads and restarts the current scene in the unity. */
     void TaskOnClick_Restart()
